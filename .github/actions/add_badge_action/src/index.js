@@ -11,7 +11,7 @@ async function main() {
         // console.log(badge);
         // const old_readme = await fs.readFile('./OldREADME.md', 'utf8');
         const textBadge = `RESULTAT DELS ÚLTIMS TESTS \n ![Test result badge](${badge}) \n`;
-        const docsText = await fs.readFile('./docs/activitat_gh_actions.md', 'utf8');
+        const docsText = await fs.readFile('./docs/newREADME.md', 'utf8');
         await fs.writeFile('./README.md', textBadge);
         await fs.appendFile('./README.md', docsText);
         process.exit(0);
