@@ -8,7 +8,7 @@ inputs:
     description: "User password"
     required: true
   OAUTH_CLIENT_ID:
-    description: "Client ID"
+    description: "Client Id"
     required: true
   OAUTH_CLIENT_SECRET:
     description: "Client secret"
