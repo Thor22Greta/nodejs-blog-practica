@@ -8,7 +8,6 @@ on:
 jobs:
   linter_job:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,13 +21,10 @@ jobs:
   cypress_job:
     needs: linter_job
     runs-on: ubuntu-latest
-
     steps:
-      #step 1
       - name: Checkout code
         uses: actions/checkout@v4
 
-      #step 2
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -41,7 +37,6 @@ jobs:
       - name: Save test result
         run: echo "${{ steps.cypress.outcome }}" > result.txt
 
-      #step 3
       - name: Create artifact
         uses: actions/upload-artifact@v4
         with:
@@ -52,36 +47,30 @@ jobs:
     needs: cypress_job
     runs-on: ubuntu-latest
     continue-on-error: true
-
     steps:
-      #step 1
       - name: Checkout code
         uses: actions/checkout@v4
 
-      #step 2
       - name: Get artifact
         uses: actions/download-artifact@v4
         with:
           name: result.txt
 
-      #step 3
       - name: Set output
-        run: echo "::set-output name=cypress_outcome::$(cat result.txt)"
+        run: echo "cypress_outcome=$(cat result.txt)" >> $GITHUB_ENV
         id: cypress_outcome
 
-      #step 4
       - name: Add badge test result
         uses: ./.github/actions/add_badge_action
         with:
-          test_result: ${{steps.cypress_outcome.outputs.cypress_outcome}}
+          test_result: ${{ steps.cypress_outcome.outputs.cypress_outcome }}
 
-      #step 5
       - name: Commit and Push changes
         uses: EndBug/add-and-commit@v9
         with:
           add: .
-          author_name: "Edgar Montagud"
-          author_email: "edgarmg22@gmail.com"
+          author_name: ${{ secrets.GIT_NAME }}
+          author_email: ${{ secrets.GIT_EMAIL }}
           message: "Update test badge result"
           push: true
 
@@ -89,28 +78,23 @@ jobs:
     needs: cypress_job
     runs-on: ubuntu-latest
     continue-on-error: true
-
     steps:
-      #step 1
       - name: Checkout code
         uses: actions/checkout@v4
-      #step 2
+
       - name: Deploy in Vercel
         uses: amondnet/vercel-action@v25
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          # github-token: ${{ secrets.GH_TOKEN }} #Optional
-          vercel-args: "--prod" #Optional
-          vercel-org-id: ${{ secrets.ORG_ID}} #Required
-          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
-          # working-directory: ../../
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: "--prod"
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
 
   notificacion_job:
-    needs: [linter_job, cypress_job, modify_readme_job, deploy_job] 
+    needs: [linter_job, cypress_job, modify_readme_job, deploy_job]
     runs-on: ubuntu-latest
     if: always()
     continue-on-error: true
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -130,3 +114,4 @@ jobs:
           cypress_job_result: ${{ needs.cypress_job.result }}
           modify_readme_job_result: ${{ needs.modify_readme_job.result }}
           deploy_job_result: ${{ needs.deploy_job.result }}
+
