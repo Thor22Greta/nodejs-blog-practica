@@ -18,5 +18,12 @@
   "devDependencies": {
     "cypress": "^13.16.1",
     "eslint-config-next": "12.0.7"
-  }
+  },
+  "name": "nodejs-blog-practica",
+  "description": "Example of nextjs project using Cypress.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
