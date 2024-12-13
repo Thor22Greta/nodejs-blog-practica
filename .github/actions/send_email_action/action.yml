@@ -7,7 +7,7 @@ inputs:
   MAIL_PASSWORD:
     description: "User password"
     required: true
-  OAUTH_CLIENTID:
+  OAUTH_CLIENT_ID:
     description: "Client ID"
     required: true
   OAUTH_CLIENT_SECRET:
