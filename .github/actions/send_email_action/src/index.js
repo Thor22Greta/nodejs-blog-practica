@@ -1,7 +1,7 @@
-
+const express = require('express');
 const core = require('@actions/core');
 
-const express = require('express');
+
 const nodemailer = require('nodemailer');
 const app = express();
 const PORT = 3500;
