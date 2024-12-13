@@ -91,19 +91,16 @@ jobs:
     continue-on-error: true
 
     steps:
-      #step 1
       - name: Checkout code
         uses: actions/checkout@v4
-      #step 2
+
       - name: Deploy in Vercel
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          # github-token: ${{ secrets.GH_TOKEN }} #Optional
-          vercel-args: "--prod" #Optional
+          vercel-args: "--prod --yes" # Automático
           vercel-org-id: ${{ secrets.ORG_ID}} #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
-          # working-directory: ../../
 
   notificacion_job:
     needs: [linter_job, cypress_job, modify_readme_job, deploy_job] 
