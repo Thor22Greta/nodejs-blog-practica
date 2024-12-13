@@ -48,7 +48,7 @@ jobs:
           name: result.txt
           path: .
 
-  modify_readme_job:
+modify_readme_job:
     needs: cypress_job
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -80,8 +80,8 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: .
-          author_name: "Edgar Montagud"
-          author_email: "edgarmg22@gmail.com"
+          author_name: ${{ secrets.GIT_NAME }}
+          author_email: ${{ secrets.GIT_EMAIL }}
           message: "Update test badge result"
           push: true
 
