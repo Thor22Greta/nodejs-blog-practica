@@ -9,7 +9,7 @@ async function main() {
         const imgSuccess = 'https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg';
         const badge = testResult === 'success' ? imgSuccess : imgFail;
         const textBadge = `RESULTAT DELS ÚLTIMS TESTS \n ![Test result badge](${badge}) \n`;
-        const docsText = await fs.readFile('./docs/newReadme.md', 'utf8');
+        const docsText = await fs.readFile('./docs/activitat_gh_action.md', 'utf8');
         await fs.writeFile('./README.md', textBadge);
         await fs.appendFile('./README.md', docsText);
         process.exit(0);
