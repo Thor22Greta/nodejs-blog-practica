@@ -63648,7 +63648,7 @@ async function main() {
     try {
         const MAIL_USERNAME = core.getInput('MAIL_USERNAME');
         const MAIL_PASSWORD = core.getInput('MAIL_PASSWORD');
-        const OAUTH_CLIENTID = core.getInput('OAUTH_CLIENT_ID');
+        const OAUTH_CLIENT_ID = core.getInput('OAUTH_CLIENT_ID');
         const OAUTH_CLIENT_SECRET = core.getInput('OAUTH_CLIENT_SECRET');
         const OAUTH_REFRESH_TOKEN = core.getInput('OAUTH_REFRESH_TOKEN');
         const linter_job_result = core.getInput('linter_job_result');
