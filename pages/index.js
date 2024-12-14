@@ -194,7 +194,7 @@ export default function Home() {
         }
       `}</style>
 
-      <style jsx global>{`
+      <style global>{`
         html,
         body {
           padding: 0;
